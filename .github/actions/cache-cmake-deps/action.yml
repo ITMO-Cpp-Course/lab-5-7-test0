@@ -1,0 +1,21 @@
+name: 'Cache CMake Dependencies'
+description: 'Cache CMake dependencies (Catch2) for faster builds'
+
+inputs:
+  cache-key-suffix:
+    description: 'Suffix for cache key (e.g., build type or sanitizer name)'
+    required: false
+    default: 'default'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Cache CMake dependencies
+      uses: actions/cache@v4
+      with:
+        path: build/_deps
+        key: cmake-deps-${{ runner.os }}-${{ inputs.cache-key-suffix }}-${{ hashFiles('CMakeLists.txt', '**/CMakeLists.txt') }}
+        restore-keys: |
+          cmake-deps-${{ runner.os }}-${{ inputs.cache-key-suffix }}-
+          cmake-deps-${{ runner.os }}-
+

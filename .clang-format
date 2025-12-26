@@ -1,0 +1,10 @@
+BasedOnStyle: Microsoft
+IndentWidth: 4
+ColumnLimit: 120
+DerivePointerAlignment: false
+PointerAlignment: Left
+AllowShortFunctionsOnASingleLine: Empty
+SortIncludes: CaseSensitive
+SpaceAfterCStyleCast: true
+SpacesInAngles: false
+SpacesInContainerLiterals: false
