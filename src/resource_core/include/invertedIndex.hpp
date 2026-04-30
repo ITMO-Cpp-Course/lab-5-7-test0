@@ -16,6 +16,6 @@ class InvertedIndex
     void add(const Document& document);
     void remove(size_t id);
     std::vector<size_t> searchByWord(const std::string& word) const;
-    std::map<size_t, size_t> count(std::string& word) const;
+    std::map<size_t, size_t> count(const std::string& word) const;
 };
 } // namespace lab5::space
