@@ -31,12 +31,28 @@ TEST_CASE("Some true test", "[some_tag]")
     {
       std::cout << "-----------  " << w << "  -----------\n"; 
 
-      auto res = index.searchByWord("a");
+      auto res = index.searchByWord(w);    // вернул vector
       for (auto& e : res)
         std::cout << e << std::endl;
 
       std::cout << "----------------------\n"; 
-      auto res1 = index.count("a");
+      auto res1 = index.count(w);          // вернул map
+      for (auto& [e1, e2] : res1)
+        std::cout << e1 << " : " << e2 << std::endl;
+    }
+
+    index.remove(0);
+
+    for (auto& w : words)
+    {
+      std::cout << "-----------  " << w << "  -----------\n"; 
+
+      auto res = index.searchByWord(w);
+      for (auto& e : res)
+        std::cout << e << std::endl;
+
+      std::cout << "----------------------\n"; 
+      auto res1 = index.count(w);
       for (auto& [e1, e2] : res1)
         std::cout << e1 << " : " << e2 << std::endl;
     }

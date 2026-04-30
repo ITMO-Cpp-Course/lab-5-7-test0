@@ -29,7 +29,8 @@ namespace lab5::space
       if (it == dictionary.end())
         return {};
 
-      std::vector<size_t> ids(it->second.size());
+      std::vector<size_t> ids;
+      ids.reserve(it->second.size());
 
       for (auto& [id, cnt] : it->second)
         ids.push_back(id);
