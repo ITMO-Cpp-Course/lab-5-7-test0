@@ -1,6 +1,6 @@
 add_library(resource_core STATIC
-    src/documentBuilder.cpp
     src/document.cpp
+    src/documentBuilder.cpp
     src/invertedIndex.cpp
 )
 
