@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(Lab4 LANGUAGES CXX)
+project(Lab5 LANGUAGES CXX)
 
 # C++ standard
 set(CMAKE_CXX_STANDARD 23)
@@ -39,5 +39,5 @@ if (ENABLE_SANITIZERS AND NOT WIN32)
     target_link_options(project_sanitizers INTERFACE    $<$<CONFIG:Debug>:-fsanitize=address>)
 endif ()
 
-add_subdirectory(src)
+add_subdirectory(src/resource_core)
 add_subdirectory(tests)
