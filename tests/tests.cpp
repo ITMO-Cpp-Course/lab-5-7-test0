@@ -1,9 +1,6 @@
 #include "document.hpp"
-
 #include "documentBuilder.hpp"
-
 #include "invertedIndex.hpp"
-
 #include <catch2/catch_all.hpp>
 #include "document.hpp"
 #include "documentBuilder.hpp"
@@ -14,9 +11,7 @@
 using namespace lab5::space;
 
 TEST_CASE("[builder]")
-
 {
-
     auto words = DocumentBuilder::split_by_words("Hello, Physics! hello");
 
     REQUIRE(words.size() == 2);
@@ -27,7 +22,6 @@ TEST_CASE("[builder]")
 }
 
 TEST_CASE("[index][add][search]")
-
 {
 
     InvertedIndex index;
@@ -64,9 +58,7 @@ TEST_CASE("[index][add][search]")
 }
 
 TEST_CASE("repeat? ", "[index][count]")
-
 {
-
     InvertedIndex index;
 
     Document d = DocumentBuilder::build("repeat.txt", "word word test word");
@@ -81,9 +73,7 @@ TEST_CASE("repeat? ", "[index][count]")
 }
 
 TEST_CASE("remove test", "[index][remove]")
-
 {
-
     InvertedIndex index;
 
     Document d1 = DocumentBuilder::build("d1.txt", "uniqueword commonword");
@@ -101,18 +91,14 @@ TEST_CASE("remove test", "[index][remove]")
     index.remove(d1.getId());
 
     SECTION("no found")
-
     {
-
         auto res_unique = index.searchByWord("uniqueword");
 
         REQUIRE(res_unique.empty() == true);
     }
 
     SECTION("Shared word no longer points to the deleted document")
-
     {
-
         auto res_common = index.searchByWord("commonword");
 
         REQUIRE(res_common.size() == 1);
