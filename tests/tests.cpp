@@ -14,7 +14,7 @@ TEST_CASE("[builder]")
     REQUIRE(words["physics"] == 1);
 }
 
-TEST_CASE( "[index][add][search]")
+TEST_CASE("[index][add][search]")
 {
     InvertedIndex index;
     Document d1 = DocumentBuilder::build("doc1.txt", "Kinematics and dynamics");
