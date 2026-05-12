@@ -3,48 +3,49 @@
 
 namespace lab5::space
 {
-    void InvertedIndex::add(const Document& document)
-    {
-      auto words = DocumentBuilder::split_by_words(DocumentBuilder::lowercase(document.getContent()));
+void InvertedIndex::add(Document&& document)
+{
+    const auto doc_id = document.getId();
 
-      for (auto& [word, count] : words)
-      {
-        if (auto s = dictionary.find(word); s != dictionary.end())
-          s->second.insert({document.getId(), count});
-        else
-          dictionary.insert({word, {{document.getId(), count}}});
-      }
+    auto words = DocumentBuilder::split_by_words(DocumentBuilder::lowercase(std::move(document).getContent()));
+
+    for (auto& [word, count] : words)
+    {
+        dictionary[std::move(word)].emplace(doc_id, count);
     }
+}
 
-    void InvertedIndex::remove(size_t id)
+void InvertedIndex::remove(size_t id)
+{
+    for (auto& [word, docs] : dictionary)
     {
-      for (auto& l : dictionary)
-        std::get<1>(l).erase(id);
+        docs.erase(id);
     }
-    
-    std::vector<size_t> InvertedIndex::searchByWord(const std::string& word) const
-    {
-      auto it = dictionary.find(word);
+}
 
-      if (it == dictionary.end())
+std::vector<size_t> InvertedIndex::searchByWord(const std::string& word) const
+{
+    auto it = dictionary.find(word);
+
+    if (it == dictionary.end())
         return {};
 
-      std::vector<size_t> ids;
-      ids.reserve(it->second.size());
+    std::vector<size_t> ids;
+    ids.reserve(it->second.size());
 
-      for (auto& [id, cnt] : it->second)
+    for (auto& [id, cnt] : it->second)
         ids.push_back(id);
 
-      return ids;
-    }
+    return ids;
+}
 
-    std::map<size_t, size_t> InvertedIndex::count(const std::string& word) const
-    {
-      auto it = dictionary.find(word);
+std::map<size_t, size_t> InvertedIndex::count(const std::string& word) const
+{
+    auto it = dictionary.find(word);
 
-      if (it == dictionary.end())
+    if (it == dictionary.end())
         return {};
 
-      return it->second;
-    }
+    return it->second;
+}
 } // namespace lab5::space
