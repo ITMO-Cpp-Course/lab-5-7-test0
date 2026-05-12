@@ -12,7 +12,7 @@ std::string DocumentBuilder::lowercase(const std::string& word)
 {
     std::string result;
     result.reserve(word.size());
-    for (unsigned char c : word)
+    for (char c : word)
     {
         result += static_cast<char>(std::tolower(c));
     }
@@ -24,7 +24,7 @@ std::unordered_map<std::string, size_t> DocumentBuilder::split_by_words(const st
     std::unordered_map<std::string, size_t> dictionary_word_count;
     std::string word;
 
-    for (unsigned char c : content)
+    for (char c : content)
     {
         if (std::isalnum(c))
         {
