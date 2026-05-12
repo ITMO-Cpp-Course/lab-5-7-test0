@@ -2,8 +2,8 @@
 
 namespace lab5::space
 {
-Document::Document(const size_t id, const std::string& name, const std::string& content)
-    : id(id), name(name), content(content)
+Document::Document(size_t new_id, const std::string& new_name, const std::string& new_content)
+    : id(new_id), name(new_name), content(new_content)
 {
 }
 

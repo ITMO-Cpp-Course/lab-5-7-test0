@@ -12,7 +12,7 @@ class Document
     std::string name;
     std::string content;
 
-    Document(const size_t id, const std::string& name, const std::string& content);
+    Document(size_t new_id, const std::string& new_name, const std::string& new_content);
 
   public:
     const std::string& getName() const;
