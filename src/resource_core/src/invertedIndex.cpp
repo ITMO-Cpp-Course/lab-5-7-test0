@@ -11,7 +11,7 @@ void InvertedIndex::add(Document&& document)
 
     for (auto& [word, count] : words)
     {
-        dictionary[std::move(word)].emplace(doc_id, count);
+        dictionary[word].emplace(doc_id, count);
     }
 }
 
