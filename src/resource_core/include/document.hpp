@@ -17,6 +17,6 @@ class Document
   public:
     const std::string& getName() const;
     const std::string& getContent() const;
-    const size_t getId() const;
+    size_t getId() const;
 };
 } // namespace lab5::space

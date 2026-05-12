@@ -15,7 +15,7 @@ const std::string& Document::getContent() const
 {
     return content;
 }
-const size_t Document::getId() const
+size_t Document::getId() const
 {
     return id;
 }
