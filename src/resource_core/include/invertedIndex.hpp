@@ -18,7 +18,8 @@ class InvertedIndex
     std::unordered_map<word_t, std::map<doc_id_t, count_t>> dictionary;
 
   public:
-    void add(Document&& document);
+    // void add(Document&& document);
+    void add(const Document& document);
     void remove(size_t id);
     std::vector<size_t> searchByWord(const std::string& word) const;
     std::map<size_t, size_t> count(const std::string& word) const;
