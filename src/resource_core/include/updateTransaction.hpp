@@ -14,8 +14,10 @@ class UpdateTransaction
   private:
     IndexStore& real; // old version of index
     IndexStore copy;
-    bool isCommitted = false;
-    bool isInvalid = true;
+    // bool isCommitted = false;
+    bool isValid = false;
+
+    void close();
 
   public:
     explicit UpdateTransaction(IndexStore& s);
@@ -26,13 +28,14 @@ class UpdateTransaction
     UpdateTransaction(UpdateTransaction&& old);
     UpdateTransaction& operator=(UpdateTransaction&& old);
 
+    ~UpdateTransaction();
+
     Result<void> add(lab5::space::Document&& doc);
     Result<void> add(const lab5::space::Document& doc);
     Result<void> remove(size_t id);
     Result<std::vector<size_t>> searchByWord(const std::string& word);
     Result<std::map<size_t, size_t>> count(const std::string& word);
     Result<void> commit();
-    bool commited();
     bool valid();
 };
 } // namespace lab6::space
