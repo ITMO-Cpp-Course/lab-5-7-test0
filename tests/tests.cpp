@@ -86,7 +86,6 @@ TEST_CASE("remove test", "[index][remove]")
     }
 }
 
-
 /*************
  * TO DELETE *
  *************/
@@ -105,7 +104,7 @@ TEST_CASE("store example test", "[store][example]")
     voidRes = tr.add(d2);
 
     auto res = tr.searchByWord("uniqueword");
-    //REQUIRE(index.searchByWord("commonword").size() == 2);
+    // REQUIRE(index.searchByWord("commonword").size() == 2);
 
     voidRes = tr.remove(id1);
 
