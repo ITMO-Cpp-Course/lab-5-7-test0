@@ -1,5 +1,6 @@
 #pragma once
 #include "document.hpp"
+#include "indexError.hpp"
 #include "invertedIndex.hpp"
 #include <expected>
 #include <map>
@@ -8,10 +9,6 @@
 
 namespace lab6::space
 {
-struct IndexError
-{
-    std::string message;
-};
 
 template <typename T> using Result = std::expected<T, IndexError>;
 
@@ -21,6 +18,7 @@ class IndexStore
   private:
     friend class UpdateTransaction;
     lab5::space::InvertedIndex index;
+    bool isTransactionOpened = false;
 
   public:
     IndexStore() = default;
@@ -28,6 +26,7 @@ class IndexStore
     UpdateTransaction startTransaction();
 
     Result<void> add(lab5::space::Document&& doc);
+    Result<void> add(const lab5::space::Document& doc);
     Result<void> remove(size_t id);
     Result<std::vector<size_t>> searchByWord(const std::string& word) const;
     Result<std::map<size_t, size_t>> count(const std::string& word) const;

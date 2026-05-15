@@ -3,11 +3,24 @@
 
 namespace lab5::space
 {
-void InvertedIndex::add(Document&& document)
+
+/*void InvertedIndex::add(Document&& document)
 {
     const auto doc_id = document.getId();
 
-    auto words = DocumentBuilder::split_by_words(DocumentBuilder::lowercase(std::move(document).getContent()));
+    auto words = DocumentBuilder::split_by_words(DocumentBuilder::lowercase(document.getContent()));
+
+    for (auto& [word, count] : words)
+    {
+        dictionary[word].emplace(doc_id, count);
+    }
+}*/
+
+void InvertedIndex::add(const Document& document)
+{
+    const auto doc_id = document.getId();
+
+    auto words = DocumentBuilder::split_by_words(DocumentBuilder::lowercase(document.getContent()));
 
     for (auto& [word, count] : words)
     {
