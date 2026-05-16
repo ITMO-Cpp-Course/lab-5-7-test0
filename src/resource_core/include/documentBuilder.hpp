@@ -1,16 +1,21 @@
 #pragma once
 #include "document.hpp"
 #include <string>
-#include <vector>
+#include <unordered_map>
 
 namespace lab5::space
 {
 class DocumentBuilder
 {
-  public:
-    Document build(const size_t id, const std::string& name, const std::string& content);
+  private:
+    inline static size_t doc_counter = 0;
 
-    std::string lowercase(const std::string& word) const;
-    std::vector<std::string> split_by_words(const std::string& content) const;
+  public:
+    DocumentBuilder() = delete;
+
+    static Document build(const std::string& name, const std::string& content);
+
+    static std::string lowercase(const std::string& word);
+    static std::unordered_map<std::string, size_t> split_by_words(const std::string& content);
 };
 } // namespace lab5::space

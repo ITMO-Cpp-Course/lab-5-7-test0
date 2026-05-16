@@ -2,7 +2,9 @@ add_library(resource_core STATIC
     src/document.cpp
     src/documentBuilder.cpp
     src/invertedIndex.cpp
-)
+    src/indexStore.cpp
+    src/indexError.cpp
+    src/updateTransaction.cpp)
 
 target_compile_features(resource_core PUBLIC cxx_std_20)
 

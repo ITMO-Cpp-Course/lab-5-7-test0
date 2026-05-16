@@ -590,3 +590,6 @@ FodyWeavers.xsd
 # Build directories
 build/
 build-*/
+
+### VisualStudio ###
+.vs/
