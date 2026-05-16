@@ -9,6 +9,12 @@ namespace lab6::space
 {
 UpdateTransaction IndexStore::startTransaction()
 {
+    if (isTransactionOpened)
+    {
+        throw IndexError{"Transaction for this index store already opened"};
+    }
+
+    isTransactionOpened = true;
     return UpdateTransaction(*this);
 }
 
@@ -16,10 +22,25 @@ Result<void> IndexStore::add(lab5::space::Document&& document)
 {
     try
     {
-        auto tr = startTransaction();
+        index.add(document);
+        return Result<void>();
+    }
+    catch (const std::exception& e)
+    {
+        return std::unexpected(IndexError{e.what()});
+    }
+    catch (...)
+    {
+        return std::unexpected(IndexError{"Unknown critical error"});
+    }
+}
 
-        tr.get().add(std::move(document));
-        return tr.commit();
+Result<void> IndexStore::add(const lab5::space::Document& document)
+{
+    try
+    {
+        index.add(document);
+        return Result<void>();
     }
     catch (const std::exception& e)
     {
@@ -35,10 +56,9 @@ Result<void> IndexStore::remove(size_t id)
 {
     try
     {
-        auto tr = startTransaction();
+        index.remove(id);
 
-        tr.get().remove(id);
-        return tr.commit();
+        return Result<void>();
     }
     catch (const std::exception& e)
     {
